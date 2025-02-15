@@ -10,4 +10,9 @@ class Comment extends Model
      use HasFactory;
 
     protected $fillable = ['user_id', 'content'];
+     // Polymorphic relationship.
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
 }

@@ -47,4 +47,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+     // A user (acting as an event manager) can create many events.
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'created_by');
+    }
+
+    // A user can have many tickets (for events they attend).
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    // A user can write many comments.
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
