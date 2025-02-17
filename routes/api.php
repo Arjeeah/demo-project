@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\VenueController;
 
 // Public routes: Registration and Login.
 Route::post('/register', [AuthController::class, 'register']);
@@ -11,7 +12,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // Protected routes using Sanctum middleware.
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-
+//------------------------------------Events---------------------------------------
 
     Route::prefix('events')->group(function () {
         // List all events – requires permission to view events.
@@ -38,6 +39,32 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Add a comment to an event – requires permission to view events (or a dedicated "comment" permission).
         Route::post('/{id}/add-comment', [EventController::class, 'addComment'])->middleware('permission:view event');
+        
+    });
+    //------------------------------------Venues---------------------------------------
+    Route::prefix('venues')->group(function () {
+         // List all venues with optional filtering (requires "view venue" permission).
+    Route::get('/', [VenueController::class, 'index'])->middleware('permission:view venue');
+
+    // Retrieve a specific venue.
+    Route::get('/{id}', [VenueController::class, 'show'])->middleware('permission:view venue');
+
+    // Create a new venue (requires "create venue" permission).
+    Route::post('/', [VenueController::class, 'store'])->middleware('permission:create venue');
+
+    // Update an existing venue (requires "edit venue" permission).
+    Route::put('/{id}', [VenueController::class, 'update'])->middleware('permission:edit venue');
+    Route::patch('/{id}', [VenueController::class, 'update'])->middleware('permission:edit venue');
+
+    // Delete a venue (requires "delete venue" permission).
+    Route::delete('/{id}', [VenueController::class, 'destroy'])->middleware('permission:delete venue');
+
+    // Additional endpoints:
+    // Add a comment to a venue (using polymorphic relationship).
+    Route::post('/{id}/add-comment', [VenueController::class, 'addComment'])->middleware('permission:view venue');
+
+    // List all events at the venue.
+    Route::get('/{id}/events', [VenueController::class, 'listEvents'])->middleware('permission:view venue');
     });
 
 });

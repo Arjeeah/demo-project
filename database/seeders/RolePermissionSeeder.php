@@ -43,9 +43,6 @@ class RolePermissionSeeder extends Seeder
             'edit event',
             'delete event',
             'view event',
-            'create venue',
-            'edit venue',
-            'delete venue',
             'view venue'
         ]);
 
