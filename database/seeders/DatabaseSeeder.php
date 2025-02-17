@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             EventSeeder::class,
             TicketSeeder::class,
+            SponsorSeeder::class,
+
 
         ]);
         // User::factory(10)->create();

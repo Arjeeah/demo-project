@@ -28,6 +28,7 @@ class EventFactory extends Factory
             },
             'venue_id'    => $venue ? $venue->id : 1,
             'created_by'  => $user ? $user->id : 1,
+            
         ];
     }
 }

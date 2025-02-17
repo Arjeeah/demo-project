@@ -28,6 +28,10 @@ class RolePermissionSeeder extends Seeder
             'create ticket',
             'edit ticket',
             'delete ticket',
+            'view sponsor',
+            'create sponsor',
+            'edit sponsor',
+            'delete sponsor',
 
         ];
 

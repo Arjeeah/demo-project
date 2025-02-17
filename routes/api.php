@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\SponsorController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\VenueController;
 
@@ -85,6 +86,29 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Delete a ticket.
     Route::delete('/{id}', [TicketController::class, 'destroy'])->middleware('permission:delete ticket');
+    });
+
+    //------------------------------------Sponsors---------------------------------------
+    Route::prefix('sponsors')->group(function () {
+          // List all sponsors with filtering (requires "view sponsor" permission)
+    Route::get('/', [SponsorController::class, 'index'])->middleware('permission:view sponsor');
+
+    // Retrieve a specific sponsor (requires "view sponsor" permission)
+    Route::get('/{id}', [SponsorController::class, 'show'])->middleware('permission:view sponsor');
+
+    // Create a new sponsor (requires "create sponsor" permission)
+    Route::post('/', [SponsorController::class, 'store'])->middleware('permission:create sponsor');
+
+    // Update an existing sponsor (requires "edit sponsor" permission)
+    Route::put('/{id}', [SponsorController::class, 'update'])->middleware('permission:edit sponsor');
+    Route::patch('/{id}', [SponsorController::class, 'update'])->middleware('permission:edit sponsor');
+
+    // Delete a sponsor (requires "delete sponsor" permission)
+    Route::delete('/{id}', [SponsorController::class, 'destroy'])->middleware('permission:delete sponsor');
+
+    // Attach an event to this sponsor (demonstrates many-to-many relationship; requires "edit sponsor" permission)
+    Route::post('/{id}/attach-event', [SponsorController::class, 'attachEvent'])->middleware('permission:edit sponsor');
+
     });
 
 });
