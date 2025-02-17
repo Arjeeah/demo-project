@@ -24,6 +24,11 @@ class RolePermissionSeeder extends Seeder
             'edit venue',
             'delete venue',
             'view venue',
+            'view ticket',
+            'create ticket',
+            'edit ticket',
+            'delete ticket',
+
         ];
 
         foreach ($permissions as $perm) {
@@ -43,12 +48,17 @@ class RolePermissionSeeder extends Seeder
             'edit event',
             'delete event',
             'view event',
-            'view venue'
+            'view venue',
+            'view ticket',
+            'create ticket',
+            'edit ticket',
+            'delete ticket',
+
         ]);
 
         // Attendee role.
         $attendee = Role::firstOrCreate(['name' => 'attendee']);
-        $attendee->syncPermissions(['view event']);
+        $attendee->syncPermissions(['view event', 'view venue', 'view ticket', 'create ticket']);
 
         // assign the admin role to the first user.
         $user = User::first();

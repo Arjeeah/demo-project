@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\VenueController;
 
 // Public routes: Registration and Login.
@@ -65,6 +66,25 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // List all events at the venue.
     Route::get('/{id}/events', [VenueController::class, 'listEvents'])->middleware('permission:view venue');
+    });
+
+    //------------------------------------Tickets---------------------------------------
+    Route::prefix('tickets')->group(function () {
+       // List all tickets with optional filtering.
+    Route::get('/', [TicketController::class, 'index'])->middleware('permission:view ticket');
+    
+    // Retrieve a specific ticket.
+    Route::get('/{id}', [TicketController::class, 'show'])->middleware('permission:view ticket');
+    
+    // Create a new ticket.
+    Route::post('/', [TicketController::class, 'store'])->middleware('permission:create ticket');
+    
+    // Update an existing ticket.
+    Route::put('/{id}', [TicketController::class, 'update'])->middleware('permission:edit ticket');
+    Route::patch('/{id}', [TicketController::class, 'update'])->middleware('permission:edit ticket');
+    
+    // Delete a ticket.
+    Route::delete('/{id}', [TicketController::class, 'destroy'])->middleware('permission:delete ticket');
     });
 
 });
