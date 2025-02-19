@@ -5,17 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Cache;
 
 class EventController extends Controller
 {
     // List events with filtering by title and start_date range.
     public function index(Request $request)
     {
+         // Generate a unique cache key based on the request URL (including query parameters)
+    $cacheKey = 'events_' . md5($request->fullUrl());
+
+    $events = Cache::remember($cacheKey, 60, function () use ($request) {
         $query = Event::with(['venue', 'manager', 'sponsors', 'attendees', 'comments']);
 
-        // Filter by title
+        // Filter by title if provided
         if ($request->has('title')) {
-            $query->where('title', 'like', '%'.$request->query('title').'%');
+            $query->where('title', 'like', '%' . $request->query('title') . '%');
         }
 
         // Filter by start_date from (e.g., ?start_date_from=2025-01-01)
@@ -28,10 +33,13 @@ class EventController extends Controller
             $query->where('start_date', '<=', $request->query('start_date_to'));
         }
 
-        // You can add more filters as needed (e.g., by venue_id, status, etc.)
+        // Additional filters can be added here (e.g., by venue_id, status, etc.)
 
-        $events = $query->get();
-        return response()->json($events);
+        return $query->get();
+    });
+
+    return response()->json($events);
+
     }
 
     public function show($id)
