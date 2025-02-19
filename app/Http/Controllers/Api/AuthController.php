@@ -17,6 +17,7 @@ class AuthController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'role'     => 'nullable|string|in:attendee,event_manager',
         ]);
 
         $user = User::create([
@@ -25,8 +26,9 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Assign the "attendee" role by default.
-        $user->assignRole('attendee');
+        // Assign the role based on the request, default to "attendee".
+        $role = $request->input('role', 'attendee');
+        $user->assignRole($role);
 
         // Create a token for the user.
         $token = $user->createToken('authToken')->plainTextToken;
@@ -36,6 +38,8 @@ class AuthController extends Controller
             'token' => $token,
         ], 201);
     }
+
+       
 
     // Log in an existing user.
     public function login(Request $request)
