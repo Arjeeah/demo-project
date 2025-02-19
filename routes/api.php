@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\SponsorController;
 use App\Http\Controllers\Api\TicketController;
@@ -108,6 +109,26 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Attach an event to this sponsor (demonstrates many-to-many relationship; requires "edit sponsor" permission)
     Route::post('/{id}/attach-event', [SponsorController::class, 'attachEvent'])->middleware('permission:edit sponsor');
+
+    });
+
+    //------------------------------------Comments---------------------------------------
+    Route::prefix('comments')->group(function () {
+         // List all comments with optional filtering (requires "view comment" permission)
+    Route::get('/', [CommentController::class, 'index'])->middleware('permission:view comment');
+
+    // Retrieve a specific comment (requires "view comment" permission)
+    Route::get('/{id}', [CommentController::class, 'show'])->middleware('permission:view comment');
+
+    // Create a new comment (requires "create comment" permission)
+    Route::post('/', [CommentController::class, 'store'])->middleware('permission:create comment');
+
+    // Update an existing comment (requires "edit comment" permission)
+    Route::put('/{id}', [CommentController::class, 'update'])->middleware('permission:edit comment');
+    Route::patch('/{id}', [CommentController::class, 'update'])->middleware('permission:edit comment');
+
+    // Delete a comment (requires "delete comment" permission)
+    Route::delete('/{id}', [CommentController::class, 'destroy'])->middleware('permission:delete comment');
 
     });
 
