@@ -55,8 +55,8 @@ The API simulates an Event Management Platform where:
 
 1. **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/event-management-api.git
-    cd event-management-api
+    git clone https://github.com/Arjeeah/demo-project.git
+    cd demo-project
     ```
 2. **Install Dependencies**
     ```bash
