@@ -1,0 +1,1205 @@
+{
+	"info": {
+		"_postman_id": "1a24c8ee-f575-465c-9944-05352f4fe9ea",
+		"name": "event managment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33183588"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"arjeeah\",\r\n    \"email\":\"argea2004@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"password_confirmation\":\"12345678\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/register",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"email\": \"admin1@example.com\",\r\n     \"password\":\"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/login",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|4r0HKlROcMuYc2Y3LWJL2ryXn45dWIbgNM0qaIgA1619e4ce",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/logout",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "events",
+			"item": [
+				{
+					"name": "List events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://demo-project.test/api/events",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Autem quod beatae pariatur sit similique",
+									"disabled": true
+								},
+								{
+									"key": "start_date_from",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "start_date_to",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/events/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"title\": \"Autem quod beatae pariatur sit similique.\",\r\n        \"description\": \"Vel eaque voluptates non non at numquam voluptatem. Quas fugiat asperiores quia necessitatibus fuga voluptate nostrum culpa. Ut aut aliquid voluptates enim autem. Fugiat quia nihil consequatur veniam.\",\r\n        \"start_date\": \"2025-02-14 09:15:50\",\r\n        \"end_date\": \"2025-02-14 09:15:50\",\r\n                \"venue_id\": 17\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/events",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"title\": \"Autem quod beatae pariatur sit similique.\",\r\n        \"description\": \"Vel eaque voluptates non non at numquam voluptatem. Quas fugiat asperiores quia necessitatibus fuga voluptate nostrum culpa. Ut aut aliquid voluptates enim autem. Fugiat quia nihil consequatur veniam.\",\r\n        \"start_date\": \"2025-02-14 09:15:50\",\r\n        \"end_date\": \"2025-02-14 09:15:50\",\r\n                \"venue_id\": 17\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/events/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update event",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/events/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/events/51",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events",
+								"51"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attach sponsor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sponsor_id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/events/1/attach-sponsor",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events",
+								"1",
+								"attach-sponsor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all attendees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://demo-project.test/api/events/1/attendees",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events",
+								"1",
+								"attendees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"first comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/events/1/add-comment",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"events",
+								"1",
+								"add-comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "venue",
+			"item": [
+				{
+					"name": "list venues",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://demo-project.test/api/venues",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show venue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/venues/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create venue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"name\": \"Von Ltd\",\r\n    \"address\": \"8645 Vandervort Inlet Apt. 645\\nNorth Clint, NV 28223\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/venues",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update venue",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n     \"name\": \"Von Ltd yooo\",\r\n    \"address\": \"8645 Vandervort Inlet Apt. 645\\nNorth Clint, NV 28223\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/venues/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update venue",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"name\": \"Von Ltd\",\r\n    \"address\": \"8645 Vandervort Inlet Apt. 645\\nNorth Clint, NV 28223\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/venues/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete venue",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/venues/21",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"first comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/venues/1/add-comment",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues",
+								"1",
+								"add-comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list all events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/venues/1/events",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"venues",
+								"1",
+								"events"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ticket",
+			"item": [
+				{
+					"name": "list tickets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://demo-project.test/api/tickets",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show ticket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/tickets/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"event_id\": 36,\r\n    \"seat_number\": \"Seat-810cd\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/tickets",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update ticket",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"event_id\": 36,\r\n    \"seat_number\": \"Seat-810cd\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/tickets/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update ticket",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"event_id\": 36,\r\n    \"seat_number\": \"Seat-810cd\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/tickets/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete ticket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/tickets/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sponsors",
+			"item": [
+				{
+					"name": "list sponsors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://demo-project.test/api/sponsors",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show sponsor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/sponsors/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create sponsor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Pfannerstill-Boehm\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/sponsors",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update sponsors",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"name\": \"Pfannerstill-Boehm\",\r\n        \"description\": \"Molestiae in adipisci voluptatem odit molestiae quas.\",\r\n        \"logo_url\": \"https://via.placeholder.com/200x200.png/001111?text=business+Faker+soluta\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/sponsors/2",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update sponsors",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"name\": \"Pfannerstill-Boehm\",\r\n        \"description\": \"Molestiae in adipisci voluptatem odit molestiae quas.\",\r\n        \"logo_url\": \"https://via.placeholder.com/200x200.png/001111?text=business+Faker+soluta\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/sponsors/2",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete sponsors",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/sponsors/21",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attach-event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"event_id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/sponsors/2/attach-event",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"2",
+								"attach-event"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "list comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://demo-project.test/api/comments?commentable_type=App\\Models\\Event",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "commentable_type",
+									"value": "App\\Models\\Event"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/comments/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Debitis voluptatem harum corporis quaerat nostrum rerum. Quasi et sit consequatur accusamus est ut. Natus illo cupiditate aut rem incidunt eos. Ut ex unde ab.\",\r\n    \"commentable_type\": \"App\\\\Models\\\\Veneu\",\r\n    \"commentable_id\": 13\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/comments",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentable_type\": \"App\\\\Models\\\\Veneu\",\r\n    \"commentable_id\": 13,\r\n    \"content\": \"Debitis voluptatem harum corporis quaerat nostrum rerum. Quasi et sit consequatur accusamus est ut. Natus illo cupiditate aut rem incidunt eos. Ut ex unde ab.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/comments/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentable_type\": \"App\\\\Models\\\\Veneu\",\r\n    \"commentable_id\": 13,\r\n    \"content\": \"Debitis voluptatem harum corporis quaerat nostrum rerum. Quasi et sit consequatur accusamus est ut. Natus illo cupiditate aut rem incidunt eos. Ut ex unde ab.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://demo-project.test/api/comments/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://demo-project.test/api/comments/1",
+							"protocol": "http",
+							"host": [
+								"demo-project",
+								"test"
+							],
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "1|3lvbRwxjhD9zGckeApNm1R87Bzmh3X4Uam2dZK4f41296cea",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
