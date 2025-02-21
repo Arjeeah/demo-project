@@ -1,66 +1,198 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Event Management API - README
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a backend API for an Event Management Platform built using Laravel. It demonstrates robust RESTful API design, token-based authentication with Laravel Sanctum, and role/permission management with Spatie Laravel Permission. The project is designed to meet the requirements for a backend developer interview project.
 
-## About Laravel
+## Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Business Scenario](#business-scenario)
+- [Technologies & Libraries](#technologies--libraries)
+- [Project Setup & Configuration](#project-setup--configuration)
+- [.env Settings](#env-settings)
+- [Migrations, Seeders, and Testing](#migrations-seeders-and-testing)
+- [API Endpoints](#api-endpoints)
+- [Performance Optimizations](#performance-optimizations)
+- [Additional Libraries & Packages](#additional-libraries--packages)
+- [Summary](#summary)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Business Scenario
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The API simulates an Event Management Platform where:
 
-## Learning Laravel
+- **Admins** have full control over the platform.
+- **Event Managers** can create, update, and delete events.
+- **Attendees** can view events and purchase tickets.
+- **Sponsors** support events.
+- **Comments** can be added to events and venues using polymorphic relationships.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Resources Created
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **User:** Handles authentication and role assignment.
+- **Event:** Represents events with details such as title, description, start/end dates, and associated venue.
+- **Venue:** Represents locations where events are held.
+- **Ticket:** Manages ticket purchases linking events and users.
+- **Sponsor:** Represents organizations that sponsor events.
+- **Comment:** Demonstrates polymorphic relationships by allowing comments on both events and venues.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Technologies & Libraries
 
-## Laravel Sponsors
+- **Laravel 10+:** The PHP framework used to build the API.
+- **MySQL:** The relational database.
+- **Laravel Sanctum:** Provides token-based authentication for the API.
+- **Spatie Laravel Permission:** Manages roles and permissions.
+- **Faker:** Used for generating fake data via Laravel factories.
+- **PHPUnit:** For automated feature and unit tests.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Project Setup & Configuration
 
-### Premium Partners
+### Prerequisites
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- PHP 8.0+
+- Composer
+- MySQL
+- Node.js (optional, if you plan to add frontend assets)
 
-## Contributing
+### Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Clone the Repository**
+    ```bash
+    git clone https://github.com/yourusername/event-management-api.git
+    cd event-management-api
+    ```
+2. **Install Dependencies**
+    ```bash
+    composer install
+    ```
+3. **Install Sanctum & Spatie Packages**
+    ```bash
+    composer require laravel/sanctum spatie/laravel-permission
+    ```
+4. **Publish Vendor Assets**
+    ```bash
+    php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+    php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    ```
 
-## Code of Conduct
+## .env Settings
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copy the example environment file and update the settings:
+```bash
+cp .env.example .env
+```
+Then, open the `.env` file and set your database credentials and other sensitive data:
+```env
+APP_NAME="Event Management API"
+APP_ENV=local
+APP_KEY=base64:GENERATED_KEY_HERE
+APP_DEBUG=true
+APP_URL=http://localhost
 
-## Security Vulnerabilities
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=event_management
+DB_USERNAME=your_mysql_user
+DB_PASSWORD=your_mysql_password
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+CACHE_DRIVER=file
+QUEUE_CONNECTION=database
 
-## License
+SANCTUM_STATEFUL_DOMAINS=localhost
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Migrations, Seeders, and Testing
+
+### Running Migrations
+```bash
+php artisan migrate
+```
+
+### Running Seeders
+
+Seed the database with sample data (venues, events, tickets, sponsors, comments, and roles/permissions):
+```bash
+php artisan db:seed --class=RolePermissionSeeder
+php artisan db:seed --class=VenueSeeder
+php artisan db:seed --class=EventSeeder
+php artisan db:seed --class=TicketSeeder
+php artisan db:seed --class=SponsorSeeder
+php artisan db:seed --class=CommentSeeder
+```
+Alternatively, seed all at once by adding them to `DatabaseSeeder.php` and running:
+```bash
+php artisan migrate:fresh --seed
+```
+
+### Running Tests
+```bash
+php artisan test
+```
+The tests cover all endpoints (Events, Venues, Tickets, Sponsors, and Comments) and verify that the API meets the requirements.
+
+## API Endpoints
+
+The API routes are grouped by resource and protected by authentication and role/permission middleware.
+
+### Example: Event Routes
+
+- **GET** `/api/events` – List events (with filtering via query parameters like `title`, `start_date_from`, and `start_date_to`).
+- **GET** `/api/events/{id}` – Retrieve details for a specific event.
+- **POST** `/api/events` – Create a new event (requires `create event` permission).
+- **PUT/PATCH** `/api/events/{id}` – Update an event (requires `edit event` permission).
+- **DELETE** `/api/events/{id}` – Delete an event (requires `delete event` permission).
+- **POST** `/api/events/{id}/attach-sponsor` – Attach a sponsor to an event.
+- **GET** `/api/events/{id}/attendees` – List event attendees.
+- **POST** `/api/events/{id}/add-comment` – Add a comment to an event.
+
+Other controllers (VenueController, TicketController, SponsorController, CommentController) have similar CRUD and custom relationship endpoints. See the `routes/api.php` file for full details.
+
+## Performance Optimizations
+
+### Caching
+
+To improve performance, caching is implemented in the Event index endpoint. For example, the endpoint caches the filtered events for 60 seconds using Laravel's Cache facade:
+```php
+use Illuminate\Support\Facades\Cache;
+
+public function index(Request $request)
+{
+    $cacheKey = 'events_' . md5($request->fullUrl());
+
+    $events = Cache::remember($cacheKey, 60, function () use ($request) {
+        $query = Event::with(['venue', 'manager', 'sponsors', 'attendees', 'comments']);
+
+        if ($request->has('title')) {
+            $query->where('title', 'like', '%' . $request->query('title') . '%');
+        }
+        if ($request->has('start_date_from')) {
+            $query->where('start_date', '>=', $request->query('start_date_from'));
+        }
+        if ($request->has('start_date_to')) {
+            $query->where('start_date', '<=', $request->query('start_date_to'));
+        }
+
+        return $query->get();
+    });
+
+    return response()->json($events);
+}
+```
+
+## Additional Libraries & Packages
+
+- **Laravel Sanctum:** Used for API token authentication. It provides a simple authentication system for SPAs and mobile applications.
+- **Spatie Laravel Permission:** This package simplifies role and permission management. It allows fine-grained access control for API endpoints.
+- **Faker:** Used to generate realistic fake data for testing and seeding the database.
+- **PHPUnit:** The testing framework used to write and run unit and feature tests.
+
+## Summary
+
+This project demonstrates:
+
+- A robust Laravel API design using RESTful principles.
+- Token-based authentication with Laravel Sanctum.
+- Role and permission management with Spatie.
+- Complex database relationships including one-to-many, many-to-many, and polymorphic relationships.
+- Automated tests that cover all endpoints and functionality.
+- Performance optimizations via caching.
